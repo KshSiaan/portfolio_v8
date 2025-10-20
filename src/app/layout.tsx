@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Provider from "@/provider/provider";
 
 const geistSans = Montserrat({
   variable: "--font-geist-sans",
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.className} antialiased`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Provider>{children}</Provider>
+        </ThemeProvider>
       </body>
     </html>
   );
