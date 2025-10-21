@@ -7,6 +7,7 @@ import {
 } from "@/components/kibo-ui/announcement";
 import { Spinner } from "@/components/kibo-ui/spinner";
 import RotatingText from "@/components/RotatingText";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowUpRightIcon, ChevronUpIcon, MailIcon } from "lucide-react";
@@ -132,16 +133,16 @@ export default function Home() {
           {isPending ? (
             <Spinner variant="ring" />
           ) : isError ? (
-            <p>{error?.message ?? "Something went wrong"}</p>
+            <Badge>{error.message}</Badge>
           ) : (
-            <Link href={data?.html_url ?? ""}>
+            <Link href={data?.data?.html_url ?? ""}>
               <Announcement
                 className="group hover:bg-primary hover:text-background"
                 themed
               >
                 <AnnouncementTag>Latest update</AnnouncementTag>
                 <AnnouncementTitle>
-                  Current Project: {data?.name}
+                  Current Project: {data?.data?.name ?? ""}
                   <ArrowUpRightIcon
                     className="shrink-0 text-muted-foreground group-hover:ml-4 group-hover:text-background transition-all"
                     size={16}
