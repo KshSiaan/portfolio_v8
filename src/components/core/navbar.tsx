@@ -14,7 +14,9 @@ import Link from "next/link";
 export default function Navbar() {
   return (
     <nav className="border-b h-16 flex justify-between items-center px-6">
-      <span className="text-xl font-bold">{"< Raven />"}</span>
+      <Link href={"/"} className="text-xl font-bold">
+        {"< Raven />"}
+      </Link>
 
       <div className="space-x-2 flex items-center">
         {/* Desktop Links */}
