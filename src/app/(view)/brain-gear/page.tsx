@@ -1,6 +1,7 @@
 "use client";
 import { StripedPattern } from "@/components/magicui/striped-pattern";
-import { motion } from "framer-motion";
+import { motion, useAnimation, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 import {
   FaCss3Alt,
   FaFigma,
@@ -19,6 +20,14 @@ import { TbBrandCpp, TbBrandFramerMotion } from "react-icons/tb";
 import { RoughNotation } from "react-rough-notation";
 
 export default function Page() {
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [controls, isInView]);
   return (
     <main>
       <section className="min-h-screen flex flex-col items-center justify-center bg-background relative px-4 py-12 sm:py-16 md:py-20">
@@ -47,12 +56,21 @@ export default function Page() {
         />
       </section>
 
-      <section className="min-h-screen md:h-dvh py-12 md:py-0">
-        <div className="w-full grid grid-cols-1 md:grid-cols-7 min-h-screen md:h-full gap-4 md:gap-0">
+      <section className="min-h-[60dvh] md:h-dvh py-12 md:py-0">
+        <div className="w-full grid grid-cols-1 md:grid-cols-7 min-h-[60dvh] md:h-full gap-4 md:gap-0">
           <div className="md:col-span-3 flex h-full justify-around items-center px-4 md:px-0">
             <div className="h-auto md:h-1/2">
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold">
-                <RoughNotation type="box" show color="">
+              <h3
+                className="text-2xl sm:text-3xl md:text-4xl font-semibold"
+                ref={ref}
+              >
+                <RoughNotation
+                  type="box"
+                  animate
+                  animationDelay={500}
+                  show={isInView}
+                  color=""
+                >
                   The Base Skills
                 </RoughNotation>
               </h3>
@@ -80,8 +98,8 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="min-h-screen md:h-dvh py-12 md:py-0">
-        <div className="w-full grid grid-cols-1 md:grid-cols-7 min-h-screen md:h-full gap-4 md:gap-0">
+      <section className="min-h-[60dvh] md:h-dvh py-12 md:py-0">
+        <div className="w-full grid grid-cols-1 md:grid-cols-7 min-h-[60dvh] md:h-full gap-4 md:gap-0">
           <div className="md:col-span-4 flex flex-col h-full justify-around items-center px-4 md:px-0 order-2 md:order-1">
             <div className="h-auto md:h-1/2 w-full"></div>
             <div className="h-auto md:h-1/2">
@@ -114,8 +132,8 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="min-h-screen md:h-dvh py-12 md:py-0">
-        <div className="w-full grid grid-cols-1 md:grid-cols-7 min-h-screen md:h-full gap-4 md:gap-0">
+      <section className="min-h-[60dvh] md:h-dvh py-12 md:py-0">
+        <div className="w-full grid grid-cols-1 md:grid-cols-7 min-h-[60dvh] md:h-full gap-4 md:gap-0">
           <div className="md:col-span-3 flex h-full justify-around items-center px-4 md:px-0">
             <div className="h-auto md:h-1/2">
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold">
@@ -153,8 +171,8 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="min-h-screen md:h-dvh py-12 md:py-0">
-        <div className="w-full grid grid-cols-1 md:grid-cols-7 min-h-screen md:h-full gap-4 md:gap-0">
+      <section className="min-h-[60dvh] md:h-dvh py-12 md:py-0">
+        <div className="w-full grid grid-cols-1 md:grid-cols-7 min-h-[60dvh] md:h-full gap-4 md:gap-0">
           <div className="md:col-span-4 flex flex-col h-full justify-around items-center px-4 md:px-0 order-2 md:order-1">
             <div className="h-auto md:h-1/2 w-full"></div>
             <div className="h-auto md:h-1/2">
@@ -190,7 +208,7 @@ export default function Page() {
         <div className="w-full"> `</div>
       </RoughNotation>
 
-      <section className="min-h-screen md:h-dvh py-12 md:pt-12 flex flex-col justify-around items-center px-4">
+      <section className="min-h-[60dvh] md:h-dvh py-12 md:pt-12 flex flex-col justify-around items-center px-4">
         <h2 className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
           My Hobbies
         </h2>
@@ -221,3 +239,5 @@ export default function Page() {
     </main>
   );
 }
+
+// make this page DRY as hell and make each title have inView show
