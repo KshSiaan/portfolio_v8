@@ -28,7 +28,9 @@ export default function Navbar() {
           <Link href="/brain-gear">Brain Gear</Link>
         </Button>
 
-        <AnimatedThemeToggler />
+        <span className="hidden lg:block">
+          <AnimatedThemeToggler />
+        </span>
 
         {/* Mobile Menu */}
         <Sheet>
